@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
-	public static final int WIDTH = 800, HEIGHT = 650;
+	public static final int WIDTH = 1000, HEIGHT = 800;
 
 	public Graphics g;
 
@@ -85,13 +85,11 @@ public class Game extends Canvas implements Runnable {
 
 		g = bs.getDrawGraphics();
 
-		g.setColor(Color.black);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-
 		drawGrid(g);
 
 		// handler.render();
 
+		
 		g.dispose();
 		bs.show();
 	}

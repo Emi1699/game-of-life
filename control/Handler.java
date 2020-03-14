@@ -11,7 +11,7 @@ public class Handler {
 	public void tick() {
 		for (Cell [] row : grid) {
 			for(Cell column : row) {
-				System.out.println(column);
+				column.tick();
 			}
 		}
 	}
@@ -19,8 +19,17 @@ public class Handler {
 	public void render(Graphics g) {
 		for (Cell [] row : grid) {
 			for(Cell column : row) {
-				System.out.println(column);
+				column.render(g);
 			}
 		}
+	}
+	
+	public Cell[][] getGrid() {
+		return grid;
+	}
+	
+	public static void main(String [] args) {
+		Handler h = new Handler();
+		System.out.println(h.grid[0].length);
 	}
 }

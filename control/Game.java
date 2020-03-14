@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 
 import game.Cell;
+import game.State;
 
 public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 1000, HEIGHT = 800;
@@ -17,9 +18,15 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private Handler handler;
+	public Cell [][] grid = new Cell [Game.WIDTH/Cell.size][Game.HEIGHT/Cell.size]; 
 	private boolean running = false;
 
 	public Game() {
+		for (int i = 0; i < WIDTH/Cell.size; i++) {
+			for (int j = 0; j < HEIGHT/Cell.size; i++) {
+				handler.grid[i][j] = new Cell(State.ALIVE, g);
+			}
+		}
 		new Window(WIDTH, HEIGHT, "Game of Life", this);
 	}
 

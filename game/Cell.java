@@ -5,16 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cell {
-	private int x, y;
+	private posX, posY;
 	private Map<Character, Cell> neighbours = new HashMap<Character, Cell>();
 	private Graphics g;
 	private State currentState, nextState;
 	
 	public final static int size = 20;
 	
-	public Cell(int x, int y, State state, Graphics g) {
-		this.x = x;
-		this.y = y;
+	public Cell(State state, Graphics g) {
 		this.currentState = state;
 		this.g = g;
 	}
@@ -28,7 +26,7 @@ public class Cell {
 	}
 	
 	public void render(Graphics g) {
-		g.drawRect(x, y, size, size);
+		g.drawRect(size, size, size, size);
 	}
 	
 	//LEFT TO DO: ADD HANDLER

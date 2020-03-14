@@ -1,4 +1,4 @@
-package game;
+package control;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;

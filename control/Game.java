@@ -1,9 +1,14 @@
-package game;
+package control;
 
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
+
+import game.Cell;
 
 public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 1000, HEIGHT = 800;
@@ -66,13 +71,12 @@ public class Game extends Canvas implements Runnable {
 //				frames = 0;
 //			}
 
-			// System.out.println(handler.bullets.size());
 		}
 		stop();
 	}
 
 	private void tick() {
-		// handler.tick();
+		 handler.tick();
 	}
 
 	private void render() {
@@ -82,12 +86,11 @@ public class Game extends Canvas implements Runnable {
 			this.createBufferStrategy(3);
 			return;
 		}
-
 		g = bs.getDrawGraphics();
 
 		drawGrid(g);
 
-		// handler.render();
+//		handler.render(g);
 
 		
 		g.dispose();
@@ -95,13 +98,13 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void drawGrid(Graphics g) {
-								// golden
-		g.setColor(rgbToColor(218, 165, 32));
+		g.setColor(rgbToColor(218, 165, 32));  // golden
 
-		for (int k = 10; k < WIDTH; k += Cell.size) {
+		for (int k = 0; k < WIDTH; k += Cell.size) {
 			g.drawLine(k, 0, k, HEIGHT);
 			g.drawLine(0, k, WIDTH, k);
 		}
+		
 	}
 
 	private Color rgbToColor(int r, int g, int b) {

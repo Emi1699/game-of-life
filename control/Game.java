@@ -20,18 +20,23 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	public Cell [][] grid = new Cell [Game.WIDTH/Cell.size][Game.HEIGHT/Cell.size]; 
 	private boolean running = false;
-
-	public Game() {
-		for (int i = 0; i < WIDTH/Cell.size; i++) {
-			for (int j = 0; j < HEIGHT/Cell.size; i++) {
-				handler.grid[i][j] = new Cell(State.ALIVE, g);
-			}
-		}
-		new Window(WIDTH, HEIGHT, "Game of Life", this);
+	
+	public static void main(String[] args) {
+		Handler h = new Handler();
+		new Game(h);
 	}
 
-	public static void main(String[] args) {
-		new Game();
+	public Game(Handler h) {
+		handler = h;
+		for (int i = 0; i < HEIGHT/Cell.size; i++) {
+			for (int j = 0; j < WIDTH/Cell.size; j++) {
+				handler.grid[j][i] = new Cell(j, i, g);
+			}
+		}
+		
+		
+		new Window(WIDTH, HEIGHT, "Game of Life", this);
+		
 	}
 
 	public synchronized void start() {
@@ -55,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 	public void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
+		double amountOfTicks = 120.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
@@ -68,15 +73,28 @@ public class Game extends Canvas implements Runnable {
 				tick(); // update game states for every object
 				delta--;
 			}
+			try {
+				Thread.sleep(750);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (running)
 				render(); // render every object in the game
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+
 			frames++;
 
-//			if (System.currentTimeMillis() - timer > 1000) {
-//				timer += 1000;
-//				System.out.println("FPS: " + frames);
-//				frames = 0;
-//			}
+			if (System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				System.out.println("FPS: " + frames);
+				frames = 0;
+			}
 
 		}
 		stop();
@@ -97,7 +115,7 @@ public class Game extends Canvas implements Runnable {
 
 		drawGrid(g);
 
-//		handler.render(g);
+		handler.render(g);
 
 		
 		g.dispose();

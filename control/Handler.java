@@ -9,17 +9,18 @@ public class Handler {
 	public Cell [][] grid = new Cell [Game.WIDTH/Cell.size][Game.HEIGHT/Cell.size]; 
 
 	public void tick() {
-		for (Cell [] row : grid) {
-			for(Cell column : row) {
-				column.tick();
+		for (int i = 0; i < Game.WIDTH/Cell.size; i++) {
+			for (int j = 0; j < Game.HEIGHT/Cell.size; j++) {
+				grid[i][j].tick();
 			}
 		}
+//		System.out.println("TICK1");
 	}
 
 	public void render(Graphics g) {
-		for (Cell [] row : grid) {
-			for(Cell column : row) {
-				column.render(g);
+		for (int i = 0; i < Game.WIDTH/Cell.size; i++) {
+			for (int j = 0; j < Game.HEIGHT/Cell.size; j++) {
+				grid[i][j].render(g);
 			}
 		}
 	}
@@ -29,7 +30,5 @@ public class Handler {
 	}
 	
 	public static void main(String [] args) {
-		Handler h = new Handler();
-		System.out.println(h.grid[0].length);
 	}
 }

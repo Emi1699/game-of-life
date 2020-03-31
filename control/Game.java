@@ -18,7 +18,6 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private Handler handler;
-	public Cell[][] grid = new Cell[Game.WIDTH / Cell.size][Game.HEIGHT / Cell.size];
 	private boolean running = false;
 
 	public static void main(String[] args) {
@@ -30,23 +29,16 @@ public class Game extends Canvas implements Runnable {
 		handler = h;
 		for (int i = 0; i < HEIGHT/Cell.size; i++) {
 			for (int j = 0; j < WIDTH/Cell.size; j++) {
-				Cell cell = new Cell(j, i, g);
-//				int aliveNs = countAliveNeighbours(j, i);
-//				cell.setAliveNeighbours(aliveNs);
 				handler.grid[j][i] = new Cell(j, i, g);
+				if (handler.grid[j][i].getState() == State.ALIVE)
+					System.out.print(1 + " ");
+				else
+					System.out.print(0 + " ");
 			}
+			System.out.println();
 		}
 		
-//		for (int i = 0; i < HEIGHT/Cell.size; i++) {
-//			for (int j = 0; j < WIDTH/Cell.size; j++) {
-//				aliveNbrs = handler.getAliveNeighbours();
-//				grid[j][i].aliveNeighbours();
-//			}
-//		}
-		
-		
 		new Window(WIDTH, HEIGHT, "Game of Life", this);
-		
 	}
 
 	public synchronized void start() {
@@ -92,21 +84,7 @@ public class Game extends Canvas implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-
 			frames++;
-
-//			if (System.currentTimeMillis() - timer > 1000) {
-//				timer += 1000;
-//				System.out.println("FPS: " + frames);
-//				frames = 0;
-//			}
-
 		}
 		stop();
 	}

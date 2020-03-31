@@ -25,10 +25,6 @@ public class Cell {
 		this.g = g;
 	}
 	
-	public void aliveNeighbours (int aN) {
-		aliveNeighbours = aN;
-	}
-	
 	public State getState() {
 		return this.currentState;
 	}
@@ -37,11 +33,20 @@ public class Cell {
 	public void tick(int aliveNeighbours) {
 		
 //		System.out.println(this.currentState);
-		if (currentState == State.ALIVE)
-			nextState = State.DEAD;
-		else
+		if (currentState == State.ALIVE && (aliveNeighbours == 2 || aliveNeighbours == 3)) {
 			nextState = State.ALIVE;
+		}
+		else if (currentState == State.DEAD && aliveNeighbours == 3) {
+			nextState = State.ALIVE;
+		} else {
+			nextState = State.DEAD;
+		}
 	}
+	
+	//RULES!!!!
+//	Any live cell with two or three neighbors survives.
+//	Any dead cell with three live neighbors becomes a live cell.
+//	All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 	
 	public void render(Graphics g) {
 		if (this.currentState == State.DEAD)

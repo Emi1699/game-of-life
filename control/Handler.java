@@ -2,10 +2,6 @@ package control;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 import game.Cell;
 import game.Neighbour;
@@ -15,18 +11,19 @@ public class Handler {
 	public Cell [][] grid = new Cell [Game.WIDTH/Cell.size][Game.HEIGHT/Cell.size]; 
 
 	public void tick() {
-		for (int i = 0; i < Game.WIDTH/Cell.size; i++) {
-			for (int j = 0; j < Game.HEIGHT/Cell.size; j++) {
-				grid[i][j].tick();
+		for (int i = 0; i < Game.HEIGHT/Cell.size; i++) {
+			for (int j = 0; j < Game.WIDTH/Cell.size; j++) {
+				int aliveNeighbours = getAliveNeighbours(getNeighbours(j, i));
+				grid[j][i].tick(aliveNeighbours);
 			}
 		}
 //		System.out.println("TICK1");
 	}
 
 	public void render(Graphics g) {
-		for (int i = 0; i < Game.WIDTH/Cell.size; i++) {
-			for (int j = 0; j < Game.HEIGHT/Cell.size; j++) {
-				grid[i][j].render(g);
+		for (int i = 0; i < Game.HEIGHT/Cell.size; i++) {
+			for (int j = 0; j < Game.WIDTH/Cell.size; j++) {
+				grid[j][i].render(g);
 			}
 		}
 	}
@@ -47,9 +44,10 @@ public class Handler {
 	}
 	
 	private ArrayList<Cell> getNeighbours(int x, int y) {
-		ArrayList<Cell> neighbours = null;
+		ArrayList<Cell> neighbours = new ArrayList<Cell>();
 		if (x == 0) {
 			if (y == 0) {
+				System.out.println(grid[x][y + 1]);
 				neighbours.add(grid[x][y + 1]);
 				neighbours.add(grid[x + 1][y]);
 				neighbours.add(grid[x + 1][y + 1]);
@@ -59,7 +57,7 @@ public class Handler {
 				neighbours.add(grid[x + 1][y - 1]);
 			} else {
 				neighbours.add(grid[x][y - 1]);
-				neighbours.add(grid[x +  1][y - 1]);
+				neighbours.add(grid[x + 1][y - 1]);
 				neighbours.add(grid[x + 1][y]);
 				neighbours.add(grid[x + 1][y + 1]);
 				neighbours.add(grid[x][y + 1]);

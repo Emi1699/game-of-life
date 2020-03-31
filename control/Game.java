@@ -18,9 +18,9 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private Handler handler;
-	public Cell [][] grid = new Cell [Game.WIDTH/Cell.size][Game.HEIGHT/Cell.size]; 
+	public Cell[][] grid = new Cell[Game.WIDTH / Cell.size][Game.HEIGHT / Cell.size];
 	private boolean running = false;
-	
+
 	public static void main(String[] args) {
 		Handler h = new Handler();
 		new Game(h);
@@ -30,9 +30,19 @@ public class Game extends Canvas implements Runnable {
 		handler = h;
 		for (int i = 0; i < HEIGHT/Cell.size; i++) {
 			for (int j = 0; j < WIDTH/Cell.size; j++) {
+				Cell cell = new Cell(j, i, g);
+//				int aliveNs = countAliveNeighbours(j, i);
+//				cell.setAliveNeighbours(aliveNs);
 				handler.grid[j][i] = new Cell(j, i, g);
 			}
 		}
+		
+//		for (int i = 0; i < HEIGHT/Cell.size; i++) {
+//			for (int j = 0; j < WIDTH/Cell.size; j++) {
+//				aliveNbrs = handler.getAliveNeighbours();
+//				grid[j][i].aliveNeighbours();
+//			}
+//		}
 		
 		
 		new Window(WIDTH, HEIGHT, "Game of Life", this);
@@ -73,14 +83,15 @@ public class Game extends Canvas implements Runnable {
 				tick(); // update game states for every object
 				delta--;
 			}
+
+			if (running)
+				render(); // render every object in the game
 			try {
 				Thread.sleep(750);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (running)
-				render(); // render every object in the game
 //			try {
 //				Thread.sleep(1000);
 //			} catch (InterruptedException e) {
@@ -90,18 +101,18 @@ public class Game extends Canvas implements Runnable {
 
 			frames++;
 
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				System.out.println("FPS: " + frames);
-				frames = 0;
-			}
+//			if (System.currentTimeMillis() - timer > 1000) {
+//				timer += 1000;
+//				System.out.println("FPS: " + frames);
+//				frames = 0;
+//			}
 
 		}
 		stop();
 	}
 
 	private void tick() {
-		 handler.tick();
+		handler.tick();
 	}
 
 	private void render() {
@@ -117,19 +128,18 @@ public class Game extends Canvas implements Runnable {
 
 		handler.render(g);
 
-		
 		g.dispose();
 		bs.show();
 	}
 
 	private void drawGrid(Graphics g) {
-		g.setColor(rgbToColor(218, 165, 32));  // golden
+		g.setColor(rgbToColor(218, 165, 32)); // golden
 
 		for (int k = 0; k < WIDTH; k += Cell.size) {
 			g.drawLine(k, 0, k, HEIGHT);
 			g.drawLine(0, k, WIDTH, k);
 		}
-		
+
 	}
 
 	private Color rgbToColor(int r, int g, int b) {

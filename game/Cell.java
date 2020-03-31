@@ -6,18 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cell {
-	private int matX, matY; //cell's position in the matrix
-	private Map<Character, Cell> neighbours = new HashMap<Character, Cell>();
+	private int matX, matY; //cell's position in the grid
+	private int aliveNeighbours;
 	private Graphics g;
 	private State currentState, nextState;
 	
-	public final static int size = 20;
+	public static final int size = 20;
 	
 	public Cell(int x, int y, Graphics g) {
 		matX = x;
 		matY = y;
 		double rand = Math.random();
-		if ( rand < 0.45 ) 
+		if ( rand < 0.43 ) 
 			currentState = State.ALIVE;
 		else 
 			currentState = State.DEAD;
@@ -25,11 +25,13 @@ public class Cell {
 		this.g = g;
 	}
 	
-	public void countAliveNeighbours() {
-		
+	public void aliveNeighbours (int aN) {
+		aliveNeighbours = aN;
 	}
+	
 
 	public void tick() {
+		
 //		System.out.println(this.currentState);
 		if (currentState == State.ALIVE)
 			nextState = State.DEAD;
@@ -42,7 +44,7 @@ public class Cell {
 			g.setColor(Color.white);
 		else
 			g.setColor(Color.black);
-		g.fillRect(matX * size, matY * size, size, size);
+		g.fillRect(matX * size + 1, matY * size - 1, size - 1, size - 1);
 		currentState = nextState;
 	}
 	//LEFT TO DO: ADD HANDLER

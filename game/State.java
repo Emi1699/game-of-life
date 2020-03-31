@@ -5,4 +5,3 @@ public enum State {
 	DEAD,
 	RANDOM
 }
-S

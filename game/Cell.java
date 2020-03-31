@@ -29,8 +29,12 @@ public class Cell {
 		aliveNeighbours = aN;
 	}
 	
+	public State getState() {
+		return this.currentState;
+	}
+	
 
-	public void tick() {
+	public void tick(int aliveNeighbours) {
 		
 //		System.out.println(this.currentState);
 		if (currentState == State.ALIVE)

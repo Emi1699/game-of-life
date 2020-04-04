@@ -15,10 +15,12 @@ public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 1000, HEIGHT = 800;
 
 	public Graphics g;
-
+	
+	private int simulationSpeed = 1000;
 	private Thread thread;
 	private Handler handler;
 	private boolean running = false;
+	private boolean gridCheck = false;
 
 	public static void main(String[] args) {
 		Handler h = new Handler();
@@ -80,7 +82,7 @@ public class Game extends Canvas implements Runnable {
 			if (running)
 				render(); // render every object in the game
 			try {
-				Thread.sleep(75);
+				Thread.sleep(simulationSpeed);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -102,8 +104,12 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		g = bs.getDrawGraphics();
-
-		drawGrid(g);
+		
+		
+		if (!gridCheck) {
+			drawGrid(g);
+			gridCheck = true;
+		}
 
 		handler.render(g);
 
@@ -112,7 +118,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void drawGrid(Graphics g) {
-		g.setColor(rgbToColor(218, 165, 32)); // golden
+		g.setColor(Color.black); // golden
 
 		for (int k = 0; k < WIDTH; k += Cell.size) {
 			g.drawLine(k, 0, k, HEIGHT);

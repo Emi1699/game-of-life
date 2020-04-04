@@ -53,7 +53,12 @@ public class Cell {
 			g.setColor(Color.white);
 		else
 			g.setColor(Color.black);
-		g.fillRect(matJ * size + 1, matI * size - 1, size - 1, size - 1);
+		
+		if (g.getColor() == Color.white) {
+			g.fillRect(matJ * size, matI * size, size, size);
+		} else {
+			g.fillRect(matJ * size, matI * size, size, size);
+		}
 		currentState = nextState;
 	}
 	//LEFT TO DO: ADD HANDLER

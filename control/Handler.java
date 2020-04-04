@@ -46,7 +46,57 @@ public class Handler {
 	private ArrayList<Cell> getNeighbours(int i, int j) {
 		ArrayList<Cell> neighbours = new ArrayList<Cell>();
 		
-		
+		if (i == 0 && j == 0) { //upper left
+			neighbours.add(grid[i][j + 1]);
+			neighbours.add(grid[i + 1][j + 1]);
+			neighbours.add(grid[i + 1][j]);
+		} else if (i == 0 && j == grid[0].length - 1) { //upper right
+			neighbours.add(grid[i][j - 1]);
+			neighbours.add(grid[i + 1][j - 1]);
+			neighbours.add(grid[i + 1][j]);
+		} else if (i == grid.length -  1 && j == 0) { //lower left 
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i - 1][j + 1]);
+			neighbours.add(grid[i][j+1]);
+		} else if (i == grid.length - 1 && j == grid[0].length - 1) { //lower right
+			neighbours.add(grid[i - 1][j - 1]);
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i][j - 1]);
+		} else if (j == 0) { //right margin
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i - 1][j + 1]);
+			neighbours.add(grid[i][j + 1]);
+			neighbours.add(grid[i + 1][j + 1]);
+			neighbours.add(grid[i + 1][j]);
+		} else if (j == grid[0].length - 1) { //left margin
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i - 1][j - 1]);
+			neighbours.add(grid[i][j - 1]);
+			neighbours.add(grid[i + 1][j - 1]);
+			neighbours.add(grid[i - 1][j]);
+		} else if (i == 0) { //top margin
+			neighbours.add(grid[i][j - 1]);
+			neighbours.add(grid[i][j + 1]);
+			neighbours.add(grid[i + 1][j - 1]);
+			neighbours.add(grid[i + 1][j]);
+			neighbours.add(grid[i + 1][j + 1]);
+		} else if (i == grid.length - 1) { //bottom margin
+			neighbours.add(grid[i][j - 1]);
+			neighbours.add(grid[i][j + 1]);
+			neighbours.add(grid[i - 1][j - 1]);
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i - 1][j + 1]);
+		} else { //cell has neighbours all around it
+			neighbours.add(grid[i - 1][j - 1]);
+			neighbours.add(grid[i - 1][j]);
+			neighbours.add(grid[i - 1][j + 1]);
+			neighbours.add(grid[i][j - 1]);
+			neighbours.add(grid[i][j + 1]);
+			neighbours.add(grid[i + 1][j - 1]);
+			neighbours.add(grid[i + 1][j]);
+			neighbours.add(grid[i + 1][j + 1]);
+		}
+				
 		return neighbours;
 	}
 	

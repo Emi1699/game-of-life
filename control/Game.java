@@ -80,7 +80,7 @@ public class Game extends Canvas implements Runnable {
 			if (running)
 				render(); // render every object in the game
 			try {
-				Thread.sleep(750);
+				Thread.sleep(75);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

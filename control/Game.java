@@ -29,11 +29,11 @@ public class Game extends Canvas implements Runnable {
 		handler = h;
 		for (int i = 0; i < HEIGHT/Cell.size; i++) {
 			for (int j = 0; j < WIDTH/Cell.size; j++) {
-				handler.grid[j][i] = new Cell(j, i, g);
-				if (handler.grid[j][i].getState() == State.ALIVE)
+				handler.grid[i][j] = new Cell(i, j, g);
+				if (handler.grid[i][j].getState() == State.ALIVE)
 					System.out.print(1 + " ");
 				else
-					System.out.print(0 + " ");
+					System.out.print(0 + " "); 
 			}
 			System.out.println();
 		}
@@ -51,6 +51,7 @@ public class Game extends Canvas implements Runnable {
 		try {
 			thread.join();
 			running = false;
+			System.out.println("Simulation has finished running");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,14 +127,5 @@ public class Game extends Canvas implements Runnable {
 		Color c = (Color.getHSBColor(rgbValues[0], rgbValues[1], rgbValues[2]));
 
 		return c;
-	}
-
-	public static double clamp(double x, double min, double max) {
-		if (x <= min)
-			return x = min;
-		else if (x > max)
-			return x = max;
-		else
-			return x;
 	}
 }

@@ -6,16 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cell {
-	private int matX, matY; //cell's position in the grid
+	private int matJ, matI; //cell's position in the grid
 	private int aliveNeighbours;
 	private Graphics g;
 	private State currentState, nextState;
 	
 	public static final int size = 20;
 	
-	public Cell(int x, int y, Graphics g) {
-		matX = x;
-		matY = y;
+	public Cell(int y, int x, Graphics g) {
+		matI = y;
+		matJ = x;
 		double rand = Math.random();
 		if ( rand < 0.43 ) 
 			currentState = State.ALIVE;
@@ -53,7 +53,7 @@ public class Cell {
 			g.setColor(Color.white);
 		else
 			g.setColor(Color.black);
-		g.fillRect(matX * size + 1, matY * size - 1, size - 1, size - 1);
+		g.fillRect(matJ * size + 1, matI * size - 1, size - 1, size - 1);
 		currentState = nextState;
 	}
 	//LEFT TO DO: ADD HANDLER

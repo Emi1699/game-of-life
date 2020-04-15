@@ -16,12 +16,11 @@ public class Game extends Canvas implements Runnable {
 
 	public Graphics g;
 	
-	private int simulationSpeed = 1000;
+	private int simulationSpeed = 10;
 	private Thread thread;
 	private Handler handler;
 	private boolean running = false;
-	private boolean gridCheck = false;
-
+	
 	public static void main(String[] args) {
 		Handler h = new Handler();
 		new Game(h);
@@ -105,11 +104,11 @@ public class Game extends Canvas implements Runnable {
 		}
 		g = bs.getDrawGraphics();
 		
-		
-		if (!gridCheck) {
-			drawGrid(g);
-			gridCheck = true;
-		}
+		//draw the grid
+//		if (!gridCheck) {
+//			drawGrid(g);
+//			gridCheck = true;
+//		}
 
 		handler.render(g);
 
@@ -117,15 +116,15 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
-	private void drawGrid(Graphics g) {
-		g.setColor(Color.black); // golden
-
-		for (int k = 0; k < WIDTH; k += Cell.size) {
-			g.drawLine(k, 0, k, HEIGHT);
-			g.drawLine(0, k, WIDTH, k);
-		}
-
-	}
+//	private void drawGrid(Graphics g) {
+//		g.setColor(Color.black); // golden
+//
+//		for (int k = 0; k < WIDTH; k += Cell.size) {
+//			g.drawLine(k, 0, k, HEIGHT);
+//			g.drawLine(0, k, WIDTH, k);
+//		}
+//
+//	}
 
 	private Color rgbToColor(int r, int g, int b) {
 		float[] rgbValues = new float[3];

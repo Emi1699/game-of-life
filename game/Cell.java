@@ -11,13 +11,14 @@ public class Cell {
 	private Graphics g;
 	private State currentState, nextState;
 	
-	public static final int size = 20;
+	public static final int size = 5;
+	private static final double aliveRatio = 0.3;
 	
 	public Cell(int y, int x, Graphics g) {
 		matI = y;
 		matJ = x;
 		double rand = Math.random();
-		if ( rand < 0.43 ) 
+		if ( rand < aliveRatio ) 
 			currentState = State.ALIVE;
 		else 
 			currentState = State.DEAD;

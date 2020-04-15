@@ -32,6 +32,10 @@ public class Handler {
 		return grid;
 	}
 	
+	public void setGrid(Cell[][] grid) {
+		this.grid = grid;
+	}
+	
 	private int getAliveNeighbours(ArrayList<Cell> neighbours) {
 		int aliveN = 0;
 		for (Cell neighbour : neighbours) {

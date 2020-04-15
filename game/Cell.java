@@ -26,8 +26,17 @@ public class Cell {
 		this.g = g;
 	}
 	
+	public Cell(int y, int x) {
+		matI = y;
+		matJ = x;
+	}
+
 	public State getState() {
 		return this.currentState;
+	}
+	
+	public void setState(State state) {
+		this.currentState = state;
 	}
 	
 
@@ -51,9 +60,9 @@ public class Cell {
 	
 	public void render(Graphics g) {
 		if (this.currentState == State.DEAD)
-			g.setColor(Color.white);
-		else
 			g.setColor(Color.black);
+		else
+			g.setColor(Color.orange);
 		
 		if (g.getColor() == Color.white) {
 			g.fillRect(matJ * size, matI * size, size, size);

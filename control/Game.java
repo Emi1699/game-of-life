@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferStrategy;
 
 import game.Cell;
+import game.Pattern;
 import game.State;
 
 public class Game extends Canvas implements Runnable {
@@ -16,7 +17,7 @@ public class Game extends Canvas implements Runnable {
 
 	public Graphics g;
 	
-	private int simulationSpeed = 10;
+	private int simulationSpeed = 1000;
 	private Thread thread;
 	private Handler handler;
 	private boolean running = false;
@@ -28,16 +29,12 @@ public class Game extends Canvas implements Runnable {
 
 	public Game(Handler h) {
 		handler = h;
-		for (int i = 0; i < HEIGHT/Cell.size; i++) {
-			for (int j = 0; j < WIDTH/Cell.size; j++) {
-				handler.grid[i][j] = new Cell(i, j, g);
-				if (handler.grid[i][j].getState() == State.ALIVE)
-					System.out.print(1 + " ");
-				else
-					System.out.print(0 + " "); 
-			}
-			System.out.println();
-		}
+//		for (int i = 0; i < HEIGHT/Cell.size; i++) {
+//			for (int j = 0; j < WIDTH/Cell.size; j++) {
+//				handler.grid[i][j] = new Cell(i, j, g);
+//		}
+		
+		handler.setGrid(new Pattern("gosperglider").getPattern());
 		
 		new Window(WIDTH, HEIGHT, "Game of Life", this);
 	}
